@@ -137,16 +137,16 @@ Mi.pieChart.prototype = {
         
     },
     
-    drawArc: function(shape) {
+    drawArc: function(shape, coords) {
         var r = shape.radius;
         var stroke = false;
         
-        if (shape.mouseover === true) {
+        if (shape.mouseover) {
             r += 25;
         }
         
         var arc = new Path2D();
-        this.ctx.lineWidth = 3;
+        this.ctx.lineWidth = 4;
         arc.moveTo(shape.centerX, shape.centerY);
         arc.arc(shape.centerX, shape.centerY, r,
                 shape.startPoint, shape.endPoint, false);
@@ -244,8 +244,11 @@ Mi.pieChart.prototype = {
                     _this.clearAll();
                     _this.drawAll(true, coords, shape);
                 }
-
+                
+                
             }
+            
+            console.log(_this.shapes);
         }, false);
         
     },
@@ -255,13 +258,15 @@ Mi.pieChart.prototype = {
     },
     
     drawAll: function(inShape, coords, shape) {
+        this.clearAll();
+        
         for (var i = 0; i < this.shapes.length; i++) {
-            this.drawArc(this.shapes[i]);
+            this.drawArc(this.shapes[i], coords);
         }
         
         this.drawList();
         
-        if (inShape === true) {
+        if (inShape && shape.mouseover) {
             this.drawBox(coords, shape);
         }
         
@@ -317,20 +322,11 @@ Mi.pieChart.prototype = {
 };
                                      
 Mi.getMouseCoords = function(e, canvas) {
-    var totalOffsetX = 0;
-    var totalOffsetY = 0;
-    var canvasX = 0;
-    var canvasY = 0;
-    var currentElement = canvas;
-
-    do{
-        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-    }
-    while(currentElement = currentElement.offsetParent)
-
-    canvasX = e.pageX - totalOffsetX;
-    canvasY = e.pageY - totalOffsetY;
-
-    return {x:canvasX, y:canvasY}
+    
+    var rect = canvas.getBoundingClientRect();
+    
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
 }
