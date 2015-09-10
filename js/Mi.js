@@ -238,12 +238,6 @@ Mi.pieChart.prototype = {
                     _this.clearAll();
                     _this.drawAll(false, coords, shape);
                 }
-                else if (!(_this.isInPath(shape.path, canvasX, canvasY)))
-                {
-                    shape.mouseover = false;
-                    _this.clearAll();
-                    _this.drawAll(true, coords, shape);
-                }
                 
                 
             }
@@ -277,7 +271,7 @@ Mi.pieChart.prototype = {
     },
     
     drawList: function() {
-        var y = this.radius;
+        var y = this.radius / 2;
         this.ctx.globalAlpha = 1;
         for (var i = 0; i < this.list.length; i++) {
             this.ctx.fillStyle = this.list[i].color;
@@ -291,21 +285,11 @@ Mi.pieChart.prototype = {
     },
     
     drawBox: function(coords, shape) {
-        /*
-        this.ctx.globalAlpha = 1;
-        this.ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
-        this.ctx.fillRect(coords.x - 30, coords.y - 50, 120,50);
-        
-        
+        this.roundRect(coords.x - 65, coords.y - 75, 130, 50, 10);
         this.ctx.font = "18px Arial";
         this.ctx.fillStyle = '#ffffff'
         this.ctx.textAlign = "left"; 
-        this.ctx.fillText(shape.name, coords.x - 30, coords.y - 20);
-        
-        */
-        
-        this.roundRect(coords.x - 65, coords.y - 75, 130, 50, 10);
-        
+        this.ctx.fillText(shape.name, coords.x - 30, coords.y - 40); 
         
     },
     
@@ -326,7 +310,7 @@ Mi.getMouseCoords = function(e, canvas) {
     var rect = canvas.getBoundingClientRect();
     
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
     };
 }
