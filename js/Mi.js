@@ -160,6 +160,7 @@ Mi.pieChart.prototype = {
         }
     },
     
+    // Calculate arcs percents
     percent: function(shape, x, y, z) {
         if (shape.percent > 5) {
             this.ctx.font = "18px Arial";
@@ -169,6 +170,7 @@ Mi.pieChart.prototype = {
         }
     },
     
+    // Draws rounded rectangle
     roundRect: function(x, y, w, h, r) {
         if (w < 2 * r) r = w / 2;
         if (h < 2 * r) r = h / 2;
@@ -241,10 +243,12 @@ Mi.pieChart.prototype = {
         
     },
     
+    // Check if mouse is over any shape
     isInPath: function(path, canvasX, canvasY) {
         return this.ctx.isPointInPath(path, canvasX, canvasY);    
     },
     
+    // Draw shapes and list
     drawAll: function(inShape, coords, shape) {
         this.clearAll();
         
@@ -260,6 +264,7 @@ Mi.pieChart.prototype = {
         
     },
     
+    // Entirely clears the canvas
     clearAll: function() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
@@ -278,6 +283,7 @@ Mi.pieChart.prototype = {
         }
     },
     
+    // Draws pop up box when mouse is over shape
     drawBox: function(coords, shape) {
         this.roundRect(coords.x - 65, coords.y - 75, 130, 50, 10);
 
@@ -299,7 +305,8 @@ Mi.pieChart.prototype = {
                }
     }
 };
-                                     
+
+// Get current mouse coordinates                                     
 Mi.getMouseCoords = function(e, canvas) {
     
     var rect = canvas.getBoundingClientRect();
