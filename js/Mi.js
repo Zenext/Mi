@@ -6,11 +6,10 @@ Mi.pieChart = function(canvasID, config) {
     
     this.ctx = null;
     
-    /* Determines size of pie chart */
-    
-    this.radius = null;
-    
-    /* Data for chart */
+    // Determines size of pie chart, right now it`s fixed to 200
+    // and can`t be changed due to scaling problems
+ 
+    this.radius = 200;
     
     this.data = null;
     
@@ -25,10 +24,6 @@ Mi.pieChart = function(canvasID, config) {
     this.maxRadius = this.radius + 25;
     
     this.list = [];
-    
-    this.colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99',
-                   '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a',
-                   '#ffff99', '#b15928'];
     
     this.showPercents = true;
     
@@ -71,7 +66,6 @@ Mi.pieChart.prototype = {
     
     parseConfig: function(options) {
         
-        this.radius = options.size;
         this.canvas.width = options.size * 2  + 300 || options.width;
         this.canvas.height = options.size * 2 + 100 || options.height;
         this.data = options.data;
@@ -238,7 +232,7 @@ Mi.pieChart.prototype = {
                     _this.clearAll();
                     _this.drawAll(false, coords, shape);
                 }
-                
+
                 
             }
             
@@ -276,7 +270,7 @@ Mi.pieChart.prototype = {
         for (var i = 0; i < this.list.length; i++) {
             this.ctx.fillStyle = this.list[i].color;
             this.ctx.fillRect(5, y, 25, 15);
-            this.ctx.font = "22px Arial";
+            this.ctx.font = this.radius / 9 + "px Arial";
             this.ctx.fillStyle = '#000000';
             this.ctx.textAlign = "start"; 
             this.ctx.fillText(this.list[i].name, 35, y + 15);
@@ -286,7 +280,8 @@ Mi.pieChart.prototype = {
     
     drawBox: function(coords, shape) {
         this.roundRect(coords.x - 65, coords.y - 75, 130, 50, 10);
-        this.ctx.font = "18px Arial";
+
+        this.ctx.font = this.radius / 9 + "px Arial";
         this.ctx.fillStyle = '#ffffff'
         this.ctx.textAlign = "left"; 
         this.ctx.fillText(shape.name, coords.x - 30, coords.y - 40); 
