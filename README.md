@@ -1,5 +1,5 @@
 # How to use
-
+```
 var z = new Mi.pieChart('canvas1', {
     data: {
         Mandarin: 955,
@@ -14,7 +14,7 @@ var z = new Mi.pieChart('canvas1', {
     showList: true,
     showPercents: true
 });
-
+```
 ## Result
 
 ![alt tag](http://url/to/img.png)
