@@ -1,6 +1,7 @@
 # How to use
 ```
 var z = new Mi.pieChart('canvas1', {
+	size: 200,
     data: {
         Mandarin: 955,
         Spanish: 386,
@@ -17,4 +18,4 @@ var z = new Mi.pieChart('canvas1', {
 ```
 ## Result
 
-![alt tag](http://url/to/img.png)
+![Alt text](/assets/screen.png)
