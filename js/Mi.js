@@ -29,6 +29,10 @@ Mi.pieChart = function(canvasID, config) {
     
     this.showList = true;
 
+    this.colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99',
+-                   '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a',
+-                   '#ffff99', '#b15928'];
+
     
     if (typeof canvasID === 'string' && canvasID.length)
     {
@@ -65,7 +69,7 @@ Mi.pieChart = function(canvasID, config) {
 Mi.pieChart.prototype = {
     
     parseConfig: function(options) {
-        
+        this.radius = 200;
         this.canvas.width = options.size * 2  + 300 || options.width;
         this.canvas.height = options.size * 2 + 100 || options.height;
         this.data = options.data;
@@ -102,7 +106,7 @@ Mi.pieChart.prototype = {
         
         for (var i = 0; i < sorted.length; i++) {
             endPoint = (sorted[i][1] * 360) / sum;
-            var randColor = this.colors[i];
+            var randColor = this.randomColor();
             var name = sorted[i][0];
             
             this.shapes.push({
@@ -199,6 +203,7 @@ Mi.pieChart.prototype = {
         return deg * Math.PI / 180;
     },
     
+    // TODO: generate more pleasent colors
     randomColor: function() {
         var r = (Math.round(Math.random()* 127) + 127).toString(16);
         var g = (Math.round(Math.random()* 127) + 127).toString(16);
