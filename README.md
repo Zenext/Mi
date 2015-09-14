@@ -1,5 +1,5 @@
 # How to use
-```
+```javascript
 var z = new Mi.pieChart('canvas1', {
 	size: 200,
     data: {
