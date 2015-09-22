@@ -18,4 +18,5 @@ var z = new Mi.pieChart('canvas1', {
 ```
 ## Result
 
-![Alt text](/assets/screen.png)
+You can find the result here:
+https://zenext.github.io/
